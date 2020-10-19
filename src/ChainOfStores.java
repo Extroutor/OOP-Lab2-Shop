@@ -1,4 +1,5 @@
 import java.nio.IntBuffer;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -144,5 +145,55 @@ public class ChainOfStores {
 
     }
 
+    public void ShopWithTheCheapestBatchOfProducts (HashMap<Integer, Integer> batch) {
+
+        double minSum = -1.0;
+        String shopWithMinPrice = "";
+
+        for (Integer key : shops.keySet()) { //перебор магазинов
+
+            HashMap<Integer, Product> listOfProdInShop = shops.get(key).GetTheProd(); //лист продуктов данного магазина
+            int size = batch.size();
+            double sum = 0.0;
+            for (Integer temp : batch.keySet()) { //перебор товаров в партии по id
+                 if (listOfProdInShop.size() < batch.size())
+                     break;
+                 else {
+                     for (Integer product : listOfProdInShop.keySet()) { //проход по каждому продукту
+                         if (listOfProdInShop.get(product)._name.equals(products.get(temp)._name))
+                             if (listOfProdInShop.get(product)._count >= batch.get(temp))
+                                size --;
+                     }
+                 }
+            }
+            if (size != 0)
+                continue;
+            else {
+
+                for (Integer prod : batch.keySet()) {
+                    for (Integer t : listOfProdInShop.keySet()) {
+                        if (products.get(prod)._name.equals(listOfProdInShop.get(t)._name))
+                            sum += batch.get(prod) * listOfProdInShop.get(t)._price;
+
+                    }
+                }
+                if (minSum == -1.0) {
+                    minSum = sum;
+                    shopWithMinPrice = shops.get(key)._name;
+                }
+                else {
+                    if (sum < minSum) {
+                        minSum = sum;
+                        shopWithMinPrice = shops.get(key)._name;
+                    }
+                }
+            }
+        }
+        if (shopWithMinPrice.equals(""))
+            System.out.println("There are no shop, which you need");
+        else
+            System.out.println("\"" + shopWithMinPrice + "\" - " + minSum);
+
+    }
 
 }
