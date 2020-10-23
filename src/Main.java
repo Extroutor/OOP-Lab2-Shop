@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         ChainOfStores chainOfStores = new ChainOfStores();
 
@@ -17,7 +17,7 @@ public class Main {
         // 1.1 Вывести список магазинов с улицами
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("THE LIST OF SHOPS WITH ADDRESS:");
-        chainOfStores.GetList(shopslist);
+        chainOfStores.GetShopsList(shopslist);
         System.out.println("");
 
         // 2. Создать товары
@@ -42,12 +42,12 @@ public class Main {
         System.out.println("");
 
         // 3. Завезти партию товаров в магазины
-        chainOfStores.PutTheProduct(shopslist.get("Diksi"), "Bread", productsList.get("Bread"), 3, 30.0);
-        chainOfStores.PutTheProduct(shopslist.get("Diksi"), "Milk", productsList.get("Milk"), 2, 40.0);
-        chainOfStores.PutTheProduct(shopslist.get("Magnit"), "Bread", productsList.get("Bread"), 2, 28.0);
-        chainOfStores.PutTheProduct(shopslist.get("Magnit"), "Milk", productsList.get("Milk"), 1, 48.0);
-        chainOfStores.PutTheProduct(shopslist.get("Verniy"), "Bread", productsList.get("Bread"), 4, 35.0);
-        chainOfStores.PutTheProduct(shopslist.get("Verniy"), "Juice", productsList.get("Juice"), 5, 25.0);
+        chainOfStores.PutTheProductToShop(shopslist.get("Diksi"), "Bread", productsList.get("Bread"), 3, 30.0);
+        chainOfStores.PutTheProductToShop(shopslist.get("Diksi"), "Milk", productsList.get("Milk"), 2, 40.0);
+        chainOfStores.PutTheProductToShop(shopslist.get("Magnit"), "Bread", productsList.get("Bread"), 2, 28.0);
+        chainOfStores.PutTheProductToShop(shopslist.get("Magnit"), "Milk", productsList.get("Milk"), 1, 48.0);
+        chainOfStores.PutTheProductToShop(shopslist.get("Verniy"), "Bread", productsList.get("Bread"), 4, 35.0);
+        chainOfStores.PutTheProductToShop(shopslist.get("Verniy"), "Juice", productsList.get("Juice"), 5, 25.0);
 
         // 3.1 Вывести список товаров каждого магазина и их содержание
         System.out.println("THE AVAILABLE PRODUCTS IN EACH SHOPS:");
@@ -68,13 +68,19 @@ public class Main {
 
         // 3.2 Добавить ещё товар в магазин (увеличить имеющееся количество продуктов)
         chainOfStores.AddMoreProducts(shopslist.get("Diksi"), productsList.get("Bread"), 3);
+        chainOfStores.AddMoreProducts(shopslist.get("Magnit"), productsList.get("Milk"), 2);
+        chainOfStores.AddMoreProducts(shopslist.get("Verniy"), productsList.get("Juice"), 1);
+
 
         //3.3 Поменять количество товара в магазине
         chainOfStores.ChangeTheCount(shopslist.get("Diksi"), productsList.get("Bread"), 5);
+        chainOfStores.ChangeTheCount(shopslist.get("Magnit"), productsList.get("Bread"), 4);
+        chainOfStores.ChangeTheCount(shopslist.get("Verniy"), productsList.get("Bread"), 3);
+
 
         //3.4 Добавить товар, который уже есть в магазине и/или с другой стоимостью
         // (в таком случае просто увеличить количество продукта и поменять стоимость)
-        chainOfStores.PutTheProduct(shopslist.get("Diksi"), "Bread", productsList.get("Bread"), 2, 40.0);
+        chainOfStores.PutTheProductToShop(shopslist.get("Diksi"), "Bread", productsList.get("Bread"), 2, 28.0);
 
         // 3.4.1 Вывести обновлённый список товаров каждого магазина и их содержание
         System.out.println("changing the costs and counts...");
@@ -83,34 +89,29 @@ public class Main {
         System.out.println("");
 
         // 4. Найти магазин, в котором определённый товар самый дешёвый
-        System.out.println("THE SHOP WITH THE CHEAPEST BREAD:");
+        System.out.println("THE SHOP(S) WITH THE CHEAPEST BREAD:");
         chainOfStores.ShopWithTheCheapestProduct(shopslist, productsList.get("Bread"));
         System.out.println("");
 
         // 5. Понять, ĸаĸие товары можно ĸупить в магазине на неĸоторую сумму
         chainOfStores.OpportunityToBuy(shopslist.get("Diksi"), 100.0);
         System.out.println("");
+        chainOfStores.OpportunityToBuy(shopslist.get("Magnit"), 10.0);
+        System.out.println("");
 
         // 6. Купить партию товаров в магазине
         System.out.println("CAN I BUY A BATCH OF PRODUCTS IN \"DIKSI\"?");
-        double totalCost = chainOfStores.BuyBatchOfProducts(shopslist.get("Diksi"), productsList.get("Bread"), 3);
-        if (totalCost != -1.0)
-            System.out.println("Yes, you can. Total prise is " + totalCost);
-        else
-            System.out.println("No, you can't. No enough product");
+        chainOfStores.BuyBatchOfProducts(shopslist.get("Diksi"), productsList.get("Bread"), 3);
         System.out.println("");
 
         // 7. Найти, в каком магазине партия товаров дешевле
 
         HashMap<Integer, Integer> map = new HashMap<>();
-        map.put(productsList.get("Bread"), 1);
+        map.put(productsList.get("Bread"), 3);
         map.put(productsList.get("Milk"), 1);
-
 
         System.out.println("SHOP WITH THE CHEAPEST BATCH OF PRODUCTS:");
         chainOfStores.ShopWithTheCheapestBatchOfProducts(map);
-
-
 
     }
 }

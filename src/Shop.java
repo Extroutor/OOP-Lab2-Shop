@@ -19,7 +19,7 @@ public class Shop {
 
     }
 
-    public void PutTheProd(String productName, Integer productID, Integer productCount, Double productPrice) {
+    public void PutTheProd(String productName, Integer productID, Integer productCount, Double productPrice) throws Exception {
 
         Product value = productsListOfThisShop.get(productID);
         if (value == null)
@@ -30,13 +30,53 @@ public class Shop {
         }
     }
 
-    public int GetCount(Integer prodID) {
+    public void opportunityToBuy(Double money) {
+
+        int f = 0;
+
+        for (Integer key : productsListOfThisShop.keySet()) {
+
+            int prodCount = (int) (money / productsListOfThisShop.get(key)._price);
+
+            if (prodCount < 1)
+                f = 1;
+            else if (prodCount > productsListOfThisShop.get(key)._count)
+                System.out.println(productsListOfThisShop.get(key)._count + " " + productsListOfThisShop.get(key)._name);
+            else
+                System.out.println(prodCount + " " + productsListOfThisShop.get(key)._name);
+
+        }
+        if (f == 1)
+            System.out.println("Nothing(");
+
+    }
+
+    public Double buyBatchOfProducts(Integer prodID, Integer count) throws Exception {
+
+        if (!productsListOfThisShop.containsKey(prodID))
+            throw new Exception("Unvailable products");
+
+        if (count <= productsListOfThisShop.get(prodID)._count)
+            return productsListOfThisShop.get(prodID)._price * count;
+        else
+            return -1.0;
+
+    }
+
+
+    public int GetCount(Integer prodID) throws Exception {
+
+        if (!productsListOfThisShop.containsKey(prodID))
+            throw new Exception("Unvailable shop");
 
         return productsListOfThisShop.get(prodID)._count;
 
     }
 
-    public Double GetPrice(Integer prodID) {
+    public Double GetPrice(Integer prodID) throws Exception {
+
+        if (!productsListOfThisShop.containsKey(prodID))
+            throw new Exception("Unvailable shop");
 
         if (productsListOfThisShop.get(prodID) == null)
             return -1.0;
@@ -44,21 +84,29 @@ public class Shop {
 
     }
 
-    public void ChangePrice(Integer priceID, Double newPrice) {
+    public void ChangePrice(Integer prodID, Double newPrice) throws Exception {
+        if (!productsListOfThisShop.containsKey(prodID))
+            throw new Exception("Unvailable shop");
 
-        productsListOfThisShop.get(priceID)._price = newPrice;
+        productsListOfThisShop.get(prodID)._price = newPrice;
 
     }
 
-    public void addMoreProducts(Integer prodID, Integer count) {
+    public void addMoreProducts(Integer prodID, Integer count) throws Exception {
+
+        if (!productsListOfThisShop.containsKey(prodID))
+            throw new Exception("Unvailable shop");
 
         productsListOfThisShop.get(prodID)._count += count;
 
     }
 
-    public void ChangeCount(Integer priceID, Integer newCount) {
+    public void ChangeCount(Integer prodID, Integer newCount) throws Exception {
 
-        productsListOfThisShop.get(priceID)._count = newCount;
+        if (!productsListOfThisShop.containsKey(prodID))
+            throw new Exception("Unvailable shop");
+
+        productsListOfThisShop.get(prodID)._count = newCount;
 
     }
 }
