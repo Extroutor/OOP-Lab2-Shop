@@ -43,12 +43,12 @@ public class ChainOfStores {
 
     }
 
-    public void PutTheProductToShop(Integer shopID, String productName, Integer productID, Integer productCount, Double productPrice) throws Exception {
+    public void PutTheProductToShop(Integer shopID,  Integer productID, Integer productCount, Double productPrice) throws Exception {
 
         if (!shops.containsKey(shopID))
             throw new Exception("Unvailable shop");
 
-        shops.get(shopID).PutTheProd(productName, productID, productCount, productPrice);
+        shops.get(shopID).PutTheProd(productID, productCount, productPrice);
 
     }
 

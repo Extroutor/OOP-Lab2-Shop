@@ -8,9 +8,8 @@ public class Product {
         _name = name;
     }
 
-    public Product(String name, Integer productCount, Double productPrice) {
+    public Product(Integer productCount, Double productPrice) {
 
-        _name = name;
         _count = productCount;
         _price = productPrice;
 

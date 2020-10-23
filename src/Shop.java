@@ -19,11 +19,11 @@ public class Shop {
 
     }
 
-    public void PutTheProd(String productName, Integer productID, Integer productCount, Double productPrice) throws Exception {
+    public void PutTheProd(Integer productID, Integer productCount, Double productPrice) throws Exception {
 
         Product value = productsListOfThisShop.get(productID);
         if (value == null)
-            productsListOfThisShop.put(productID, new Product(productName, productCount, productPrice));
+            productsListOfThisShop.put(productID, new Product(productCount, productPrice));
         else {
             value._price = productPrice;
             value._count += productCount;

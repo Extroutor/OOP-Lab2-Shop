@@ -40,12 +40,12 @@ public class Main {
         System.out.println("");
 
         // 3. Завезти партию товаров в магазины
-        chainOfStores.PutTheProductToShop(shopsList.get("Diksi"), "Bread", productsList.get("Bread"), 3, 30.0);
-        chainOfStores.PutTheProductToShop(shopsList.get("Diksi"), "Milk", productsList.get("Milk"), 2, 40.0);
-        chainOfStores.PutTheProductToShop(shopsList.get("Magnit"), "Bread", productsList.get("Bread"), 2, 28.0);
-        chainOfStores.PutTheProductToShop(shopsList.get("Magnit"), "Milk", productsList.get("Milk"), 1, 48.0);
-        chainOfStores.PutTheProductToShop(shopsList.get("Verniy"), "Bread", productsList.get("Bread"), 4, 35.0);
-        chainOfStores.PutTheProductToShop(shopsList.get("Verniy"), "Juice", productsList.get("Juice"), 5, 25.0);
+        chainOfStores.PutTheProductToShop(shopsList.get("Diksi"), productsList.get("Bread"), 3, 30.0);
+        chainOfStores.PutTheProductToShop(shopsList.get("Diksi"), productsList.get("Milk"), 2, 40.0);
+        chainOfStores.PutTheProductToShop(shopsList.get("Magnit"),productsList.get("Bread"), 2, 28.0);
+        chainOfStores.PutTheProductToShop(shopsList.get("Magnit"), productsList.get("Milk"), 1, 48.0);
+        chainOfStores.PutTheProductToShop(shopsList.get("Verniy"), productsList.get("Bread"), 4, 35.0);
+        chainOfStores.PutTheProductToShop(shopsList.get("Verniy"), productsList.get("Juice"), 5, 25.0);
 
         // 3.1 Вывести список товаров каждого магазина и их содержание
         System.out.println("THE AVAILABLE PRODUCTS IN EACH SHOPS:");
@@ -78,7 +78,7 @@ public class Main {
 
         //3.4 Добавить товар, который уже есть в магазине и/или с другой стоимостью
         // (в таком случае просто увеличить количество продукта и поменять стоимость)
-        chainOfStores.PutTheProductToShop(shopsList.get("Diksi"), "Bread", productsList.get("Bread"), 2, 28.0);
+        chainOfStores.PutTheProductToShop(shopsList.get("Diksi"), productsList.get("Bread"), 2, 28.0);
 
         // 3.4.1 Вывести обновлённый список товаров каждого магазина и их содержание
         System.out.println("changing the costs and counts...");
