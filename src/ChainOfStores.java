@@ -85,14 +85,15 @@ public class ChainOfStores {
                 minPrice = price;
                 shopWithMinPrice = key;
                 list.put(key, price);
-            }
-            if (price < minPrice) {
-                minPrice = price;
-                shopWithMinPrice = key;
-                list.clear();
-                list.put(key, price);
-            } else if (price == minPrice) {
-                list.put(key, price);
+            } else {
+                if (price < minPrice) {
+                    minPrice = price;
+                    shopWithMinPrice = key;
+                    list.clear();
+                    list.put(key, price);
+                } else if (price == minPrice) {
+                    list.put(key, price);
+                }
             }
         }
 
